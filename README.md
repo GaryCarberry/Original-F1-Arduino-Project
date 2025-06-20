@@ -1,5 +1,5 @@
 # F1 Tire Health and Speed Simulator
-This project is best viewed using this link to tinkercad, a controlled virtual simulation that was used to test components.
+This project is best viewed using this link to tinkercad, a controlled virtual simulation that was used to test components. https://www.tinkercad.com/things/hPNPCqyd4Wd-frantic-densor-hango/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard%2Fdesigns%2Fcircuits
 ## Overview
 This project simulates an F1 car's tire health, speed, and lap timing using an Arduino with a NeoPixel LED strip and an I2C LCD display. It provides a realistic simulation where tire degradation impacts maximum speed, and the user receives visual alerts when tires are worn or when speed exceeds safe limits.
 

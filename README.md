@@ -80,13 +80,6 @@ The simulation adjusts speed based on tire type and prevents exceeding the tires
 
 ---
 
-## Author
-This project was solely developed by:
-
-**Your Name**
-
----
-
 ## License
 *Add your preferred license here (e.g., MIT, GPL, etc.)*
 

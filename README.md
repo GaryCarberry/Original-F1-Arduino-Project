@@ -1,62 +1,95 @@
-
-# F1 Tire Health and Speed Simulation
-
+# F1 Tire Health and Speed Simulator
+This project is best viewed using this link to tinkercad, a controlled virtual simulation that was used to test components.
 ## Overview
-This project simulates an F1 car’s tire health, speed, and lap timing using an Arduino microcontroller, NeoPixel LED strip, and I2C LCD display. It monitors tire degradation over laps, limits speed based on RPM constraints, and provides real-time visual feedback and alerts.
+This project simulates an F1 car's tire health, speed, and lap timing using an Arduino with a NeoPixel LED strip and an I2C LCD display. It provides a realistic simulation where tire degradation impacts maximum speed, and the user receives visual alerts when tires are worn or when speed exceeds safe limits.
+
+The simulation adjusts speed based on tire type and prevents exceeding the tires' RPM limits, providing a warning light when limits are breached. This helps users understand tire management in racing scenarios.
+
+![image](https://github.com/user-attachments/assets/a60696d8-e0a7-4054-b2b1-1aff0bde3ba8)
 
 ---
 
 ## Features
-- **Speed Control:** Simulate throttle input via potentiometer; speed is limited to max RPM.
-- **Tire Health Monitoring:** Tracks tire wear per lap and updates LED status.
-- **Lap Timing:** Calculates lap times based on track length and speed, displaying info on an LCD.
-- **Visual Alerts:** NeoPixel LEDs indicate tire condition with colors:
-  - Green: Good  
-  - Orange: Moderate wear  
-  - Red: Critical wear  
-- **Serial Output:** Periodic data sent over serial for external monitoring.
+- **Speed Simulation:** Speed is controlled via a potentiometer input and capped by tire-specific max speeds.
+- **Tire Types:** Supports `soft`, `medium`, and `hard` tires, each with distinct health and max speed characteristics.
+- **Tire Health Monitoring:** Tire health decreases each lap, affecting speed and triggering visual alerts.
+- **Visual Feedback:** Uses a 12-LED NeoPixel strip to display tire condition via colors (green, orange, red).
+- **Warning System:** A warning LED blinks if the simulated speed exceeds tire capacity.
+- **Lap Timing:** Calculates and displays remaining lap time on a 16x2 I2C LCD.
+- **User Interaction:** Tire type can be set through the terminal (currently hardcoded in code).
 
 ---
 
 ## Hardware Components
-- Arduino Uno (or compatible)
+- Arduino Uno or compatible microcontroller
 - Adafruit NeoPixel LED strip (12 LEDs)
 - Adafruit I2C Liquid Crystal Display (16x2)
 - Potentiometer (connected to analog input A0)
-- Warning LED (optional)
+- Warning LED (connected to pin 2)
+- Additional LEDs for tire type indicators (pins 3, 4, 5, 6)
 
 ---
 
 ## Wiring Summary
-- NeoPixel data pin → Arduino pin 2
-- LCD connected via I2C (SDA, SCL pins)
+- NeoPixel data line → Arduino pin 2
+- LCD I2C pins → SDA, SCL on Arduino
 - Potentiometer wiper → Analog input A0
-- Warning LED → Digital pin 2 (adjustable)
-- Other LEDs → Pins 3, 4, 5, 6 (as configured in code)
+- Warning LED → Digital pin 2
+- Tire type LEDs → Digital pins 3, 4, 5, 6
 
-*Refer to component datasheets for detailed wiring.*
+*Refer to component datasheets and Arduino pinout for detailed wiring.*
 
 ---
 
-## Installation & Usage
-1. Connect the hardware according to the wiring summary.
-2. Open the Arduino IDE and load the project code.
-3. Upload the code to the Arduino board.
-4. Turn the potentiometer to simulate speed changes.
-5. Observe tire health and lap info on the LCD.
-6. Watch NeoPixel LEDs change color based on tire condition.
-7. Optionally, monitor serial output for detailed lap and vehicle status.
+## How It Works
+1. **Setup:** Initializes LCD, LEDs, NeoPixels, and sets initial lap timer.
+2. **Tire Selection:** Based on the tire type string (`soft`, `medium`, or `hard`), the program sets tire health and max speed.
+3. **Speed Control:** Reads potentiometer input, maps it to speed while respecting max speed limits per tire type.
+4. **Tire Health:** Decreases with each lap completed; tire health affects NeoPixel color to warn the user.
+5. **Warning Light:** If speed exceeds tire max speed, a warning LED blinks.
+6. **Lap Timer:** Calculates lap time based on track length and current speed, displaying countdown on the LCD.
+7. **NeoPixel Visualization:** Displays tire condition color and a blinking effect to indicate current status.
 
 ---
 
 ## Code Structure
-- **`setup()`**: Initializes LCD, pins, NeoPixel, and serial communication.
-- **`loop()`**: Reads inputs, updates tire health, controls LEDs, calculates lap time.
-- **`softTyres()`**: Maps potentiometer input to speed and manages motor simulation.
-- **`lapTimeCalculator()`**: Calculates lap timing, manages lap transitions, updates displays.
-- **`setColor()`**: Changes NeoPixel colors based on tire health.
-
+- **`setup()`**: Initializes peripherals and starts lap timer.
+- **`loop()`**: Main control loop handling tire type logic, speed control, LED updates, and lap timing.
+- **`softTyres()`, `mediumTyres()`, `hardTyres()`**: Functions that simulate behavior for each tire type, including speed capping and warning signals.
+- **`setColor()`**: Sets NeoPixel LED colors based on tire health.
+- **`lapTimeCalculator()`**: Calculates lap progress and updates lap counters, tire health, and LCD output.
 
 ---
 
+## Usage
+1. Connect all hardware components as per the wiring summary.
+2. Upload the Arduino sketch to your board.
+3. Adjust the potentiometer to simulate throttle input.
+4. Watch the LCD for speed and lap timing updates.
+5. Observe NeoPixel LED colors reflecting tire health status.
+6. When the warning LED blinks, it indicates the tire speed limit has been reached or exceeded.
+7. Complete laps and observe tire degradation over time.
 
+---
+
+## Notes
+- The tire type (`soft`, `medium`, `hard`) is currently set via the code in the `tyres` string variable.
+- The simulation is designed to run for 52 laps on a 5.891 km track, simulating Silverstone F1 race conditions.
+- Maximum speeds and tire health values are based on realistic F1 data and assumptions.
+- The environment also lags a lot due to the large amount of data being processed, this can be fixed by relying less on the unisigned long time variable
+
+---
+
+## Author
+This project was solely developed by:
+
+**Your Name**
+
+---
+
+## License
+*Add your preferred license here (e.g., MIT, GPL, etc.)*
+
+---
+
+If you want, I can help you generate a wiring diagram or assist with adding extra features! Would you like that?

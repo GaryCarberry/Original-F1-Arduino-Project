@@ -78,11 +78,3 @@ The simulation adjusts speed based on tire type and prevents exceeding the tires
 - Maximum speeds and tire health values are based on realistic F1 data and assumptions.
 - The environment also lags a lot due to the large amount of data being processed, this can be fixed by relying less on the unisigned long time variable
 
----
-
-## License
-*Add your preferred license here (e.g., MIT, GPL, etc.)*
-
----
-
-If you want, I can help you generate a wiring diagram or assist with adding extra features! Would you like that?

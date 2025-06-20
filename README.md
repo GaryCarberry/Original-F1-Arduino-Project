@@ -56,15 +56,7 @@ This project simulates an F1 car’s tire health, speed, and lap timing using an
 - **`lapTimeCalculator()`**: Calculates lap timing, manages lap transitions, updates displays.
 - **`setColor()`**: Changes NeoPixel colors based on tire health.
 
----
-
-## Contributors
-This project was developed collaboratively by two members:  
-- Gary Carberry  
-- Rueben Bell
 
 ---
 
-## License
-[Add your preferred license here]
 
